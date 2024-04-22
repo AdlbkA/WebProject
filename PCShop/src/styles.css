@@ -1,3 +1,13 @@
+html {
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+app-authorization {
+  padding: 70px 0;
+  display: flex;
+  justify-content: center;
+}
+
 app-top-bar {
     background-color: rgb(141, 177, 236);
     width: 100%;

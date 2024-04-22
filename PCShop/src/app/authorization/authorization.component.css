@@ -1,0 +1,18 @@
+p {
+    margin-block: 8px;
+}
+
+input {
+    padding: 6px;
+    border: 1px solid #b9c0cd;
+}
+
+button {
+    margin-top: 8px;
+    display: block;
+    background-color: rgb(141, 177, 236);
+    border: 0px;
+    border-radius: 12px;
+    padding-inline: 12px;
+    padding-block: 6px;
+}
