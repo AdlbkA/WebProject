@@ -10,4 +10,16 @@ class Product(models.Model):
     description = models.TextField()
     price = models.DecimalField()
     image = models.ImageField()
+    quantity = models.IntegerField()
+    rating = models.FloatField()
     category_id = models.ForeignKey(to='Category', on_delete=models.CASCADE)
+
+
+class Supplier(models.Model):
+    name = models.CharField(max_length=255)
+    rating = models.FloatField()
+    product = models.ForeignKey(to='Product', on_delete=models.CASCADE)
+
+
+class Delivery(models.Model):
+    pass
