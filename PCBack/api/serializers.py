@@ -19,7 +19,8 @@ class ProductSerializer(serializers.ModelSerializer):
     image = serializers.CharField(max_length=None)
     quantity = serializers.IntegerField()
     rating = serializers.FloatField()
-    category_id = CategorySerializer()
+    category_id = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
+
 
     class Meta:
         model = Product
