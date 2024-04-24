@@ -1,4 +1,7 @@
+from django.contrib.auth import get_user_model
 from django.db import models
+
+User = get_user_model()
 
 
 class Category(models.Model):
@@ -7,6 +10,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
+    user = models.ForeignKey(to=User, on_delete=models.SET_NULL)
     description = models.TextField()
     price = models.FloatField()
     image = models.TextField()
@@ -15,17 +19,11 @@ class Product(models.Model):
     category_id = models.ForeignKey(to='Category', on_delete=models.CASCADE)
 
 
-class Supplier(models.Model):
-    name = models.CharField(max_length=255)
-    rating = models.FloatField()
-    product = models.ForeignKey(to='Product', on_delete=models.CASCADE)
+class Cart(models.Model):
+    user = models.OneToOneRel(User, on_delete=models.CASCADE)
 
 
-class Delivery(models.Model):
-    name = models.CharField(max_length=255)
-    rating = models.FloatField()
-    product = models.ForeignKey(to='Product', on_delete=models.CASCADE)
-
-
-class Manager(models.Manager):
-    pass
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
