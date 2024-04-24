@@ -1,0 +1,13 @@
+<div>
+  <h2>Add Product</h2>
+  <form (submit)="addProduct()">
+    <label for="name">Name:</label>
+    <input type="text" id="name" [(ngModel)]="newProduct.name" required>
+    <label for="description">Description:</label>
+    <textarea id="description" [(ngModel)]="newProduct.description" required></textarea>
+    <label for="price">Price:</label>
+    <input type="number" id="price" [(ngModel)]="newProduct.price" required>
+    <!-- Add more input fields as needed -->
+    <button type="submit">Add Product</button>
+  </form>
+</div>
