@@ -1,12 +1,3 @@
-# from django.urls import path
-# from .views import *
-#
-# urlpatterns = [
-#     path('categories/', category_list),
-#     path('products/', products_method),
-#     path('supliers/', SupplierList.as_view()),
-#     path('products/<int:id>', update_product)
-# ]
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView,TokenRefreshView
 from .views import *

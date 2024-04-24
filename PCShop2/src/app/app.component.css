@@ -29,3 +29,8 @@ nav h1 {
   margin: auto;
   margin-top: 20px;
 }
+
+a {
+  text-decoration: none;
+  color: black;
+}

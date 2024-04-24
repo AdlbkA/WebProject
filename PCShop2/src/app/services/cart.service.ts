@@ -41,6 +41,6 @@ export class CartService {
   }
 
   removeItemFromCart(itemId: number): Observable<any> {
-    return this.http.delete(`${this.BASE_URL}delete-cart-item/${itemId}/`);
+    return this.http.delete(`${this.BASE_URL}delete/${itemId}/`);
   }
 }
