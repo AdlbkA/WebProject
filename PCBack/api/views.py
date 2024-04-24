@@ -16,7 +16,7 @@ def category_list(request):
         return Response(serializer.data)
 
 
-@api_view(["GET", "POST", "PUT", "DELETE"])
+@api_view(["GET", "POST"])
 def products_method(request):
     if request.method == "GET":
         products = Product.objects.all()
@@ -30,23 +30,23 @@ def products_method(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == "PUT":
-        try:
-            product = Product.objects.get(id=id)
-        except Product.DoesNotExist as e:
-            return Response({"error": str(e)}, status=status.HTTP_404_NOT_FOUND)
-        serializer = ProductSerializer(product, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-        return Response(serializer.data)
-        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == "DELETE":
-        try:
-            product = Product.objects.get(id=id)
-        except Product.DoesNotExist as e:
-            return Response({"error": str(e)}, status=status.HTTP_404_NOT_FOUND)
-        product.delete()
-        return Response({"message": "Product deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+    # elif request.method == "PUT":
+    #     try:
+    #         product = Product.objects.get(id=id)
+    #     except Product.DoesNotExist as e:
+    #         return Response({"error": str(e)}, status=status.HTTP_404_NOT_FOUND)
+    #     serializer = ProductSerializer(product, data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #     return Response(serializer.data)
+    #     # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    # elif request.method == "DELETE":
+    #     try:
+    #         product = Product.objects.get(id=id)
+    #     except Product.DoesNotExist as e:
+    #         return Response({"error": str(e)}, status=status.HTTP_404_NOT_FOUND)
+    #     product.delete()
+    #     return Response({"message": "Product deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
 
 
 # @api_view(["POST"])
@@ -61,20 +61,23 @@ def products_method(request):
 #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# @api_view(["PUT"])
-# def update_product(request, id=None):
-#     try:
-#         product = Product.objects.get(id=id)
-#     except Product.DoesNotExist as e:
-#         return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
-#     if request.method == "PUT":
-#         serializer = ProductSerializer(product, data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#
-#
+@api_view(["PUT", "DELETE"])
+def update_product(request, id=None):
+    try:
+        product = Product.objects.get(id=id)
+    except Product.DoesNotExist as e:
+        return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+    if request.method == "PUT":
+        serializer = ProductSerializer(product, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == "DELETE":
+        product.delete()
+        return Response({"message": "Product deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+
+
 # @api_view(["DELETE"])
 # def delete_product(request, id=None):
 #     try:
